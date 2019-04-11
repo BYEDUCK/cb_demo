@@ -18,8 +18,7 @@ class BeerController(@Autowired private var beerService: BeerService) {
 
     @GetMapping("/beers/byName")
     fun findByName(@RequestParam(value = "name", required = true) name: String): Beer {
-        val found = beerService.findByName(name)
-        return if (found.size == 1) found[0] else Beer()
+        return beerService.findByName(name)
     }
 
 }

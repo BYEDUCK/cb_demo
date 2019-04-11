@@ -6,6 +6,6 @@ interface BeerService {
 
     fun findAll(): List<Beer>
 
-    fun findByName(name: String): List<Beer>
+    fun findByName(name: String): Beer
 
 }
