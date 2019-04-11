@@ -8,10 +8,13 @@ import com.nhaarman.mockito_kotlin.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
 
 @RunWith(MockitoJUnitRunner::class)
 internal class BeerServiceImplTest {
@@ -37,9 +40,9 @@ internal class BeerServiceImplTest {
     @Test
     fun findAll() {
         val beer = Beer()
-        whenever(beerRepository.findAll()).thenReturn(listOf(beer))
+        whenever(beerRepository.findAll(any(PageRequest::class.java))).thenReturn(PageImpl(listOf(beer)))
         val found = beerServiceImpl.findAll()
         assertThat(found).isNotNull.contains(beer)
-        verify(beerRepository, times(1)).findAll()
+        verify(beerRepository, times(1)).findAll(any(PageRequest::class.java))
     }
 }

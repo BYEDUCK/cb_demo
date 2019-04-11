@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.RestController
 class BeerController(@Autowired private var beerService: BeerService) {
 
     @GetMapping("/beers")
-    fun findAll(): List<Beer> {
-        return beerService.findAll()
+    fun findAll(
+            @RequestParam(value = "page", required = false) page: Int?,
+            @RequestParam(value = "size", required = false) size: Int?
+    ): List<Beer> {
+        return if (page != null && size != null)
+            beerService.findAll(pageNum = page, pageSize = size)
+        else
+            beerService.findAll()
     }
 
     @GetMapping("/beers/byName")
