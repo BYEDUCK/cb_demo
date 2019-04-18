@@ -41,7 +41,7 @@ internal class BeerServiceImplTest {
     fun findAll() {
         val beer = Beer()
         whenever(beerRepository.findAll(any(PageRequest::class.java))).thenReturn(PageImpl(listOf(beer)))
-        val found = beerServiceImpl.findAll()
+        val found = beerServiceImpl.findAll(1, 10)
         assertThat(found).isNotNull.contains(beer)
         verify(beerRepository, times(1)).findAll(any(PageRequest::class.java))
     }

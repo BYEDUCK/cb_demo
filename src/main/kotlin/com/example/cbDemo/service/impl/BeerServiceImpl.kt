@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service
 @Service
 class BeerServiceImpl(@Autowired private var beerRepository: BeerRepository) : BeerService {
 
+    override fun findAll(): List<Beer> {
+        return beerRepository.findAll().toList()
+    }
+
     override fun findAll(pageNum: Int, pageSize: Int): List<Beer> {
         val pageFound = beerRepository.findAll(PageRequest.of(pageNum, pageSize))
         return pageFound.content

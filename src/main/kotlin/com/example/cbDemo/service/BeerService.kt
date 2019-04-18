@@ -6,6 +6,8 @@ interface BeerService {
 
     fun findByName(name: String): Beer
 
-    fun findAll(pageNum: Int = 1, pageSize: Int = 10): List<Beer>
+    fun findAll(pageNum: Int, pageSize: Int): List<Beer>
+
+    fun findAll(): List<Beer>
 
 }
