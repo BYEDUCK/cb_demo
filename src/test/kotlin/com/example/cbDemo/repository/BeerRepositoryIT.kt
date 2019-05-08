@@ -7,6 +7,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.test.context.junit4.SpringRunner
 
 @SpringBootTest
@@ -23,10 +24,9 @@ internal class BeerRepositoryIT {
     }
 
     @Test
-    @Ignore
     fun findAllWithDefaultPage() {
-        val found = beerRepository.findAll(PageRequest.of(1, 10))
-        assertThat(found).isNotNull.isNotEmpty
+        val found = beerRepository.findAll(PageRequest.of(0, 10, Sort(Sort.DEFAULT_DIRECTION, "name")))
+        assertThat(found.content).isNotNull
     }
 
 }
